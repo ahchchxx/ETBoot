@@ -3,8 +3,21 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fb96bf46-2b03-457a-ad96-83a689291bb9" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
   <component name="FileColors">
     <fileColor scope="All" color="c5e0b3" />
+  </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -17,10 +30,107 @@
   <component name="MavenRunner">
     <option name="jreName" value="#JAVA_HOME" />
   </component>
+  <component name="ProjectId" id="1lUsc3F1YFmNyX2Vopovb1WycKl" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.file-colors" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RunManager">
+    <configuration name="ETBootApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.etboot.ETBootApp" />
+      <module name="ETBoot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.etboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ETBootApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fb96bf46-2b03-457a-ad96-83a689291bb9" name="Default Changelist" comment="" />
+      <created>1607663083488</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607663083488</updated>
+      <workItem from="1607663084687" duration="1441000" />
+      <workItem from="1607664615287" duration="35000" />
+      <workItem from="1607664654713" duration="89000" />
+      <workItem from="1607664760530" duration="3025000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="179" width="1092" height="741" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607665352036">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="414" y="179" width="1092" height="741" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1607665352036" />
+    <state width="1877" height="349" key="GridCell.Tab.0.bottom" timestamp="1607667740739">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="349" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1607667740739" />
+    <state width="1877" height="349" key="GridCell.Tab.0.center" timestamp="1607667740739">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="349" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1607667740739" />
+    <state width="1877" height="349" key="GridCell.Tab.0.left" timestamp="1607667740739">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="349" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1607667740739" />
+    <state width="1877" height="349" key="GridCell.Tab.0.right" timestamp="1607667740739">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="349" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1607667740739" />
+    <state x="440" y="99" key="SettingsEditor" timestamp="1607664956576">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="440" y="99" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1607664956576" />
+    <state x="482" y="110" width="1267" height="867" key="find.popup" timestamp="1607667711885">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="482" y="110" width="1267" height="867" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1607667711885" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1607667466598">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1607667466598" />
   </component>
 </project>
