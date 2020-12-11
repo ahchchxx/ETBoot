@@ -16,7 +16,6 @@ import java.util.List;
 public class IPermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
     @Autowired
     private PermissionMapper permissionMapper;
-    ;
 
     @Override
     public List<Permission> findByUserId(String userId) {

@@ -78,8 +78,7 @@ public class RoleController {
 
     @RequestMapping(value = "/setDefault", method = RequestMethod.POST)
     @ApiOperation(value = "设置或取消默认角色")
-    public Result<Object> setDefault(@RequestParam String id,
-                                     @RequestParam Boolean isDefault) {
+    public Result<Object> setDefault(@RequestParam String id, @RequestParam Boolean isDefault) {
         Role role = roleService.get(id);
         if (role == null) {
             return ResultUtil.error("角色不存在");
@@ -91,8 +90,7 @@ public class RoleController {
 
     @RequestMapping(value = "/editRolePerm", method = RequestMethod.POST)
     @ApiOperation(value = "编辑角色分配菜单权限")
-    public Result<Object> editRolePerm(@RequestParam String roleId,
-                                       @RequestParam(required = false) String[] permIds) {
+    public Result<Object> editRolePerm(@RequestParam String roleId, @RequestParam(required = false) String[] permIds) {
         // 删除其关联权限
         rolePermissionService.deleteByRoleId(roleId);
         // 批量分配新权限
@@ -111,13 +109,12 @@ public class RoleController {
 
     @RequestMapping(value = "/editRoleDep", method = RequestMethod.POST)
     @ApiOperation(value = "编辑角色分配数据权限")
-    public Result<Object> editRoleDep(@RequestParam String roleId,
-                                      @RequestParam Integer dataType,
+    public Result<Object> editRoleDep(@RequestParam String roleId, @RequestParam Integer dataType,
                                       @RequestParam(required = false) String[] depIds) {
         Role r = roleService.get(roleId);
         r.setDataType(dataType);
         roleService.update(r);
-        if (CommonConstant.DATA_TYPE_CUSTOM.equals(dataType)) {
+        if (CommonConstant.DATA_TYPE_CUSTOM.equals(dataType)) { // 自定义数据权限，可选任意部门
             // 删除其关联数据权限
             roleDepartmentService.deleteByRoleId(roleId);
             // 批量分配新数据权限

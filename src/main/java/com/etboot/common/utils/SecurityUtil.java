@@ -133,7 +133,9 @@ public class SecurityUtil {
     }
 
     /**
-     * 获取当前用户数据权限 null代表具有所有权限 包含值为-1的数据代表无任何权限
+     * 获取当前用户数据权限
+     *      null代表具有所有权限
+     *      包含值为-1的数据，代表无任何权限
      */
     public List<String> getDeparmentIds() {
         List<String> deparmentIds = new ArrayList<>();
@@ -142,13 +144,12 @@ public class SecurityUtil {
         String key = "userRole::depIds:" + u.getId();
         String v = redisTemplate.get(key);
         if (StrUtil.isNotBlank(v)) {
-            deparmentIds = new Gson().fromJson(v, new TypeToken<List<String>>() {
-            }.getType());
+            deparmentIds = new Gson().fromJson(v, new TypeToken<List<String>>() {}.getType());
             return deparmentIds;
         }
         // 当前用户拥有角色
         List<Role> roles = iUserRoleService.findByUserId(u.getId());
-        // 判断有无全部数据的角色
+        // 判断有无拥有“全部数据权限”的角色
         Boolean flagAll = false;
         for (Role r : roles) {
             if (r.getDataType() == null || r.getDataType().equals(CommonConstant.DATA_TYPE_ALL)) {
@@ -156,33 +157,27 @@ public class SecurityUtil {
                 break;
             }
         }
-        // 包含全部权限返回null
+        // 包含“全部数据权限”返回null
         if (flagAll) {
             return null;
         }
         // 每个角色判断 求并集
         for (Role r : roles) {
-            if (r.getDataType().equals(CommonConstant.DATA_TYPE_UNDER)) {
-                // 本部门及以下
-                if (StrUtil.isBlank(u.getDepartmentId())) {
-                    // 用户无部门
+            if (r.getDataType().equals(CommonConstant.DATA_TYPE_UNDER)) {       // 本部门及以下
+                if (StrUtil.isBlank(u.getDepartmentId())) { // 用户无部门
                     deparmentIds.add("-1");
-                } else {
-                    // 递归获取自己与子级
+                } else { // 递归获取自己与子级
                     List<String> ids = new ArrayList<>();
                     getRecursion(u.getDepartmentId(), ids);
                     deparmentIds.addAll(ids);
                 }
-            } else if (r.getDataType().equals(CommonConstant.DATA_TYPE_SAME)) {
-                // 本部门
-                if (StrUtil.isBlank(u.getDepartmentId())) {
-                    // 用户无部门
+            } else if (r.getDataType().equals(CommonConstant.DATA_TYPE_SAME)) { // 本部门
+                if (StrUtil.isBlank(u.getDepartmentId())) { // 用户无部门
                     deparmentIds.add("-1");
                 } else {
                     deparmentIds.add(u.getDepartmentId());
                 }
-            } else if (r.getDataType().equals(CommonConstant.DATA_TYPE_CUSTOM)) {
-                // 自定义
+            } else if (r.getDataType().equals(CommonConstant.DATA_TYPE_CUSTOM)) { // 自定义
                 List<String> depIds = iUserRoleService.findDepIdsByUserId(u.getId());
                 if (depIds == null || depIds.size() == 0) {
                     deparmentIds.add("-1");

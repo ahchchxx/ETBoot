@@ -36,17 +36,14 @@ public interface CommonConstant {
      * 全部数据权限
      */
     Integer DATA_TYPE_ALL = 0;
-
     /**
      * 自定义数据权限
      */
     Integer DATA_TYPE_CUSTOM = 1;
-
     /**
      * 本部门及以下
      */
     Integer DATA_TYPE_UNDER = 2;
-
     /**
      * 本部门
      */
@@ -81,12 +78,10 @@ public interface CommonConstant {
      * 顶部菜单类型权限
      */
     Integer PERMISSION_NAV = -1;
-
     /**
      * 页面类型权限
      */
     Integer PERMISSION_PAGE = 0;
-
     /**
      * 操作类型权限
      */
@@ -96,22 +91,18 @@ public interface CommonConstant {
      * 1级菜单父id
      */
     String PARENT_ID = "0";
-
     /**
      * 0级菜单
      */
     Integer LEVEL_ZERO = 0;
-
     /**
      * 1级菜单
      */
     Integer LEVEL_ONE = 1;
-
     /**
      * 2级菜单
      */
     Integer LEVEL_TWO = 2;
-
     /**
      * 3级菜单
      */

@@ -72,40 +72,39 @@ public class PermissionController {
         String key = "permission::userMenuList:" + u.getId();
         String v = redisTemplate.get(key);
         if (StrUtil.isNotBlank(v)) {
-            menuList = new Gson().fromJson(v, new TypeToken<List<MenuVo>>() {
-            }.getType());
+            menuList = new Gson().fromJson(v, new TypeToken<List<MenuVo>>() {}.getType());
             return new ResultUtil<List<MenuVo>>().setData(menuList);
         }
 
-        // 用户所有权限 已排序去重
+        // 用户所有权限，已排序去重。 xml mapper 里的原生 sql 实现
         List<Permission> list = iPermissionService.findByUserId(u.getId());
 
         // 筛选0级页面
-        menuList = list.stream().filter(p -> CommonConstant.PERMISSION_NAV.equals(p.getType()))
+        menuList = list.stream().filter(p -> CommonConstant.PERMISSION_NAV.equals(p.getType())) // Type -1 顶部菜单
                 .sorted(Comparator.comparing(Permission::getSortOrder))
                 .map(VoUtil::permissionToMenuVo).collect(Collectors.toList());
-        getMenuByRecursion(menuList, list);
+        getMenuByRecursion(menuList, list);// set 层级树状的菜单，
 
-        // 缓存
+        // 缓存不存在时，缓存当前用户的菜单数据
         redisTemplate.set(key, new Gson().toJson(menuList), 15L, TimeUnit.DAYS);
         return new ResultUtil<List<MenuVo>>().setData(menuList);
     }
 
     private void getMenuByRecursion(List<MenuVo> curr, List<Permission> list) {
         curr.forEach(e -> {
-            if (CommonConstant.LEVEL_TWO.equals(e.getLevel())) {
-                List<String> buttonPermissions = list.stream()
+            if (CommonConstant.LEVEL_TWO.equals(e.getLevel())) {// level：2 二级终端菜单       到二级菜单后，就跳出递归了
+                List<String> buttonPermissions = list.stream() // Type 1 操作按钮
                         .filter(p -> (e.getId()).equals(p.getParentId()) && CommonConstant.PERMISSION_OPERATION.equals(p.getType()))
                         .sorted(Comparator.comparing(Permission::getSortOrder))
                         .map(Permission::getButtonType).collect(Collectors.toList());
                 e.setPermTypes(buttonPermissions);
             } else {
-                List<MenuVo> children = list.stream()
+                List<MenuVo> children = list.stream()   // Type 0 页面菜单 （包含：level为 1 一级菜单，2 二级终端菜单 两级菜单）
                         .filter(p -> (e.getId()).equals(p.getParentId()) && CommonConstant.PERMISSION_PAGE.equals(p.getType()))
                         .sorted(Comparator.comparing(Permission::getSortOrder))
                         .map(VoUtil::permissionToMenuVo).collect(Collectors.toList());
                 e.setChildren(children);
-                if (e.getLevel() < 3) {
+                if (e.getLevel() < 3) { // level：0 顶部菜单，1 一级菜单，2 二级终端菜单，无3 操作按钮
                     getMenuByRecursion(children, list);
                 }
             }
