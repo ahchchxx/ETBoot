@@ -147,6 +147,7 @@ public class SecurityUtil {
             deparmentIds = new Gson().fromJson(v, new TypeToken<List<String>>() {}.getType());
             return deparmentIds;
         }
+
         // 当前用户拥有角色
         List<Role> roles = iUserRoleService.findByUserId(u.getId());
         // 判断有无拥有“全部数据权限”的角色

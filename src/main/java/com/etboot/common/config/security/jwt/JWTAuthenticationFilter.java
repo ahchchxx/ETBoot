@@ -36,9 +36,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     private XbootTokenProperties tokenProperties;
-
     private RedisTemplateHelper redisTemplate;
-
     private SecurityUtil securityUtil;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager,

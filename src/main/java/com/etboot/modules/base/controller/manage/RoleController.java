@@ -113,8 +113,9 @@ public class RoleController {
                                       @RequestParam(required = false) String[] depIds) {
         Role r = roleService.get(roleId);
         r.setDataType(dataType);
-        roleService.update(r);
-        if (CommonConstant.DATA_TYPE_CUSTOM.equals(dataType)) { // 自定义数据权限，可选任意部门
+        roleService.update(r); // 更新角色的 data_type
+
+        if (CommonConstant.DATA_TYPE_CUSTOM.equals(dataType)) { // 自定义数据权限，可选任意部门。只有这种类型会单独存库
             // 删除其关联数据权限
             roleDepartmentService.deleteByRoleId(roleId);
             // 批量分配新数据权限
@@ -125,6 +126,7 @@ public class RoleController {
                 roleDepartmentService.saveOrUpdateAll(list);
             }
         }
+
         // 手动删除相关缓存
         redisTemplate.deleteByPattern("department:" + "*");
         redisTemplate.deleteByPattern("userRole:" + "*");
