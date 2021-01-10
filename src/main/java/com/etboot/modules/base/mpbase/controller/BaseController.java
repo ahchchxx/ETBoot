@@ -41,9 +41,9 @@ public abstract class BaseController<E, ID extends Serializable> {
         return ResultUtil.error("" + i);
     }
 
-    @RequestMapping(value = "/del/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/del/{id}", method = RequestMethod.POST)
     @ResponseBody
-    @ApiOperation(value = "通过id获取")
+    @ApiOperation(value = "通过id删除")
     public Result<E> del(@PathVariable ID id) {
         int i = getService().delete(id);
         if (i > 0) {
