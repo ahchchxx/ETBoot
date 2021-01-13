@@ -18,8 +18,7 @@ public abstract class BaseController<E, ID extends Serializable> {
     // BaseService<E, ID> baseService;
     public abstract BaseService<E, ID> getService();
 
-
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST) // AntPathMatcher: /save*
     @ResponseBody
     @ApiOperation(value = "保存数据")
     public Result<E> save(E entity) {
@@ -30,7 +29,7 @@ public abstract class BaseController<E, ID extends Serializable> {
         return ResultUtil.error("" + i);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST) // AntPathMatcher: /update*
     @ResponseBody
     @ApiOperation(value = "更新数据")
     public Result<E> update(E entity) {
@@ -41,7 +40,7 @@ public abstract class BaseController<E, ID extends Serializable> {
         return ResultUtil.error("" + i);
     }
 
-    @RequestMapping(value = "/del/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/del/{id}", method = RequestMethod.POST) // AntPathMatcher: /del/*
     @ResponseBody
     @ApiOperation(value = "通过id删除")
     public Result<E> del(@PathVariable ID id) {
@@ -52,7 +51,7 @@ public abstract class BaseController<E, ID extends Serializable> {
         return ResultUtil.error("" + i);
     }
 
-    @RequestMapping(value = "/delAllByIds", method = RequestMethod.POST)
+    @RequestMapping(value = "/delAllByIds", method = RequestMethod.POST) // AntPathMatcher: /delAllByIds*/** 末尾2个*
     @ResponseBody
     @ApiOperation(value = "批量通过id删除")
     public Result<Object> delByIds(ID[] ids) {

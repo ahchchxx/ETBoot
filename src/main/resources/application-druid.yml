@@ -1,0 +1,87 @@
+
+spring:
+  # 数据源
+  datasource:
+    url: jdbc:mysql://192.168.118.131:3306/xboot?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    # Jasypt加密 可到common-utils中找到JasyptUtil加解密工具类生成加密结果 格式为ENC(加密结果) 以下解密结果为123456
+    password: ENC(uOtmALFgsfxgYzEg1uLXl3O/tg6X1Dy25I3SdAeqqETOyZbDwmaW0/EZEusIh6hK)
+    # postgres专用：
+    # username: postgres
+    # url: jdbc:postgresql://192.168.118.131:5432/xboot
+    # password: ENC(VCB83TaVxGZ2ARzCnGavP8H5UVqDlN9HhJhZcdV5Dubk9/xkmVRllnF282RvWwGj)
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #driverClassName: org.postgresql.Driver
+    # Druid StatViewServlet配置
+    druid:
+      stat-view-servlet:
+        # 默认true 内置监控页面首页/druid/index.html
+        enabled: false
+        url-pattern: /druid/*
+        # 允许清空统计数据
+        reset-enable: true
+        login-username: root
+        login-password: ENC(uOtmALFgsfxgYzEg1uLXl3O/tg6X1Dy25I3SdAeqqETOyZbDwmaW0/EZEusIh6hK)
+        # IP白名单 多个逗号分隔
+        allow:
+        # IP黑名单
+        deny:
+      filter:
+        stat:
+          # 开启监控sql
+          enabled: true
+          # 显示并标注慢sql 默认当超过3秒显示
+          log-slow-sql: true
+          slow-sql-millis: 3000
+          merge-sql: true
+        # 防SQL注入过滤
+        wall:
+          config:
+            # 允许多条sql同时执行
+            multi-statement-allow: true
+        # 初始连接数 initialSize: 5
+        initialSize: 2
+        # 最小连接池数量 minIdle: 10
+        minIdle: 2
+        # 最大连接池数量 maxActive: 20
+        maxActive: 2
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        # 配置一个连接在池中最大生存的时间，单位是毫秒
+        maxEvictableIdleTimeMillis: 900000
+        # 配置检测连接是否有效
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+  jpa:
+    show-sql: true
+    # 自动生成表结构
+    hibernate:
+      ddl-auto: update
+
+  # Redis
+  redis:
+    #host: 127.0.0.1
+    host: 192.168.118.131
+    # 数据库索引 默认0
+    database: 0
+    port: 6379
+    # 超时时间 Duration类型 3秒
+    timeout: 3S
+
+  # Elasticsearch
+#  data:
+#    elasticsearch:
+#      # 未使用到ES 关闭其持久化存储
+#      repositories:
+#        enabled: false
+#  elasticsearch:
+#    rest:
+#      # 要连接的ES客户端Rest Uri 多个逗号分隔
+#      uris: http://localhost:9200

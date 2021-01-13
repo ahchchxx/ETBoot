@@ -16,79 +16,17 @@ server:
   shutdown: graceful
 
 spring:
-  # 数据源
-  datasource:
-    url: jdbc:mysql://192.168.118.131:3306/xboot?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    # Jasypt加密 可到common-utils中找到JasyptUtil加解密工具类生成加密结果 格式为ENC(加密结果) 以下解密结果为123456
-    password: ENC(uOtmALFgsfxgYzEg1uLXl3O/tg6X1Dy25I3SdAeqqETOyZbDwmaW0/EZEusIh6hK)
-    # postgres专用：
-    # username: postgres
-    # url: jdbc:postgresql://192.168.118.131:5432/xboot
-    # password: ENC(VCB83TaVxGZ2ARzCnGavP8H5UVqDlN9HhJhZcdV5Dubk9/xkmVRllnF282RvWwGj)
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    #driverClassName: org.postgresql.Driver
-    # Druid StatViewServlet配置
-    druid:
-      stat-view-servlet:
-        # 默认true 内置监控页面首页/druid/index.html
-        enabled: true
-        url-pattern: /druid/*
-        # 允许清空统计数据
-        reset-enable: true
-        login-username: root
-        login-password: ENC(uOtmALFgsfxgYzEg1uLXl3O/tg6X1Dy25I3SdAeqqETOyZbDwmaW0/EZEusIh6hK)
-        # IP白名单 多个逗号分隔
-        allow:
-        # IP黑名单
-        deny:
-      filter:
-        stat:
-          # 开启监控sql
-          enabled: true
-          # 显示并标注慢sql 默认当超过3秒显示
-          log-slow-sql: true
-          slow-sql-millis: 3000
-          merge-sql: true
-        # 防SQL注入过滤
-        wall:
-          config:
-            # 允许多条sql同时执行
-            multi-statement-allow: true
-  jpa:
-    show-sql: true
-    # 自动生成表结构
-    hibernate:
-      ddl-auto: update
-  # Redis
-  redis:
-    #host: 127.0.0.1
-    host: 192.168.118.131
-    # 数据库索引 默认0
-    database: 0
-    port: 6379
-    # 超时时间 Duration类型 3秒
-    timeout: 3S
-#  # Elasticsearch
-#  data:
-#    elasticsearch:
-#      # 未使用到ES 关闭其持久化存储
-#      repositories:
-#        enabled: false
-#  elasticsearch:
-#    rest:
-#      # 要连接的ES客户端Rest Uri 多个逗号分隔
-#      uris: http://localhost:9200
+  profiles:
+    active: druid # 引用持久层相关配置文件
   # 定时任务
-  quartz:
-    # 任务信息存储至数据库
-    job-store-type: jdbc
-    properties:
-      org:
-        quartz:
-          jobStore:
-            misfireThreshold: 100
+#  quartz:
+#    # 任务信息存储至数据库
+#    job-store-type: jdbc
+#    properties:
+#      org:
+#        quartz:
+#          jobStore:
+#            misfireThreshold: 100
   # 文件大小上传配置
   servlet:
     multipart:
@@ -98,12 +36,12 @@ spring:
     time-zone: GMT+8
     serialization:
       fail-on-empty-beans: false
-  boot:
-    admin:
-      # 修改上下文路径
-      context-path: /xboot/admin
-      client:
-        url: http://127.0.0.1:${server.port}/xboot/admin
+#  boot:
+#    admin:
+#      # 修改上下文路径
+#      context-path: /xboot/admin
+#      client:
+#        url: http://127.0.0.1:${server.port}/xboot/admin
 
 xboot:
   # 全局限流
@@ -146,13 +84,13 @@ xboot:
   logRecord:
     es: false
   # 七牛云配置
-  qiniu:
-    accessKey: 你的accessKey
-    secretKey: 你的secretKey
-    bucket: 你的空间名
-    domain: 你的域名，如http://p77xsahe9.bkt.clouddn.com
-    # 存储区域 -1自动判断 0华东 1华北 2华南 3北美 4东南亚
-    zone: -1
+#  qiniu:
+#    accessKey: 你的accessKey
+#    secretKey: 你的secretKey
+#    bucket: 你的空间名
+#    domain: 你的域名，如http://p77xsahe9.bkt.clouddn.com
+#    # 存储区域 -1自动判断 0华东 1华北 2华南 3北美 4东南亚
+#    zone: -1
   # 腾讯位置服务key配置 腾讯位置服务官网注册添加key ip定位所需
   qqlbs:
     key: 你的腾讯位置服务key

@@ -71,7 +71,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             if (authentication == null) {
                 return;
             }
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);// ★ 将用户及其权限绑定到上下文
         } catch (Exception e) {
             log.warn(e.toString());
         }
