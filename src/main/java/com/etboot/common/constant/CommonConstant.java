@@ -48,6 +48,10 @@ public interface CommonConstant {
      * 本部门
      */
     Integer DATA_TYPE_SAME = 3;
+    /**
+     * 本人
+     */
+    Integer DATA_TYPE_SELF = 6;
 
     /**
      * 正常状态

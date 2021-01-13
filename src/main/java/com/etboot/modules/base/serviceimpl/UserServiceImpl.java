@@ -159,6 +159,10 @@ public class UserServiceImpl implements UserService {
                 if (depIds != null && depIds.size() > 0) {
                     list.add(departmentIdField.in(depIds));
                 }
+                // 仅限本人数据
+                if (StrUtil.isNotBlank(securityUtil.getIsOnlySelfData())) {
+                    list.add(cb.equal(idField, securityUtil.getIsOnlySelfData()));
+                }
 
                 Predicate[] arr = new Predicate[list.size()];
                 cq.where(list.toArray(arr));

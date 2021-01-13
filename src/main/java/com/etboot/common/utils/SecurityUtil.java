@@ -120,16 +120,26 @@ public class SecurityUtil {
     }
 
     /**
+     * 获取当前用户是否登录
+     * @return
+     */
+    public boolean isCurrUserLogin() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getName() == null || auth instanceof AnonymousAuthenticationToken) {
+            return false;
+        }
+        return true;
+    }
+    /**
      * 获取当前登录用户
      * @return
      */
     public User getCurrUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !authentication.isAuthenticated() || authentication.getName() == null
-                || authentication instanceof AnonymousAuthenticationToken) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getName() == null || auth instanceof AnonymousAuthenticationToken) {
             throw new XbootException("未检测到登录用户");
         }
-        return userService.findByUsername(authentication.getName());
+        return userService.findByUsername(auth.getName());
     }
 
     /**
@@ -150,19 +160,13 @@ public class SecurityUtil {
 
         // 当前用户拥有角色
         List<Role> roles = iUserRoleService.findByUserId(u.getId());
-        // 判断有无拥有“全部数据权限”的角色
-        Boolean flagAll = false;
+        // 判断有无拥有“全部数据权限”的角色，包含则返回null
         for (Role r : roles) {
-            if (r.getDataType() == null || r.getDataType().equals(CommonConstant.DATA_TYPE_ALL)) {
-                flagAll = true;
-                break;
-            }
+            if (r.getDataType() == null || r.getDataType().equals(CommonConstant.DATA_TYPE_ALL))
+                return null;
         }
-        // 包含“全部数据权限”返回null
-        if (flagAll) {
-            return null;
-        }
-        // 每个角色判断 求并集
+
+        // 每个角色判断，求并集
         for (Role r : roles) {
             if (r.getDataType().equals(CommonConstant.DATA_TYPE_UNDER)) {       // 本部门及以下
                 if (StrUtil.isBlank(u.getDepartmentId())) { // 用户无部门
@@ -192,6 +196,7 @@ public class SecurityUtil {
         set.addAll(deparmentIds);
         deparmentIds.clear();
         deparmentIds.addAll(set);
+
         // 缓存
         redisTemplate.set(key, new Gson().toJson(deparmentIds), 15L, TimeUnit.DAYS);
         return deparmentIds;
@@ -207,6 +212,23 @@ public class SecurityUtil {
                 getRecursion(d.getId(), ids);
             });
         }
+    }
+
+    /**
+     * 判断用户有无拥有“本人数据权限”的角色，包含则返回用户id，否则none
+     */
+    public String getIsOnlySelfData() {
+        User user = getCurrUser();
+
+        // 当前用户拥有角色
+        List<Role> roles = iUserRoleService.findByUserId(user.getId());
+        for (Role r : roles) {
+            if (r.getDataType() != null && r.getDataType().equals(CommonConstant.DATA_TYPE_SELF)) {
+                return user.getId();
+            }
+        }
+
+        return null;
     }
 
     /**

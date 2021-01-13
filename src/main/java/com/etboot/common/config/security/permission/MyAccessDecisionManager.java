@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * 权限管理决断器
- * 判断用户拥有的权限或角色是否有资源访问权限
+ * 判断用户拥有的权限或角色，是否有资源访问权限
  * @author Exrickx
  */
 @Slf4j
