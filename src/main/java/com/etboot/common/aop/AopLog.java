@@ -31,7 +31,8 @@ public class AopLog {
         // 记录下请求内容
         logger.info("Request URL(" + request.getMethod() + "): " + request.getRequestURL().toString());
         logger.info("Client IP: " + request.getRemoteAddr());
-        logger.info("Class: " + joinPoint.getSignature().getDeclaringTypeName());// + "#"
+        logger.info("Full Path: " + joinPoint.getSignature().getDeclaringTypeName());
+        logger.info("Class: " + joinPoint.getSignature().getDeclaringType().getSimpleName());
         logger.info("Method: " + joinPoint.getSignature().getName());
         String user = "no user logged";
         try {
