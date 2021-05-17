@@ -4,6 +4,10 @@
 
 Keeping learning and improving. 
 
+> Github: https://github.com/ahchchxx/ETBoot
+>
+> Gitee:  https://gitee.com/ahchchxx/ETBoot
+
 > It is a forked project from XBoot.
 
 ### 功能增强
